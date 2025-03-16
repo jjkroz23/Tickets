@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Tickets</title>
+    <!-- Vincula el archivo CSS -->
+    <link rel="stylesheet" href="styleasignacionTickets.css">
+
+    <!-- Agregar el script de JavaScript -->
+    <script>
+        function mostrarMensaje() {
+            // Mostrar el mensaje de confirmación cuando se envíe el ticket
+            alert("¡Ticket creado exitosamente!");
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Tickets Pendientes</h2>
+        <div id="ticket-list">
+            <div class="ticket">
+                <span>Ticket #1 - Problema con el login</span>
+                <button class="assign-btn" onclick="assignTicket(this)">Asignar</button>
+            </div>
+            <div class="ticket">
+                <span>Ticket #2 - Error en el pago</span>
+                <button class="assign-btn" onclick="assignTicket(this)">Asignar</button>
+            </div>
+            <div class="ticket">
+                <span>Ticket #3 - Consulta sobre el servicio</span>
+                <button class="assign-btn" onclick="assignTicket(this)">Asignar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function assignTicket(button) {
+            let agent = prompt("Ingrese su nombre para asignarse este ticket:");
+            if (agent) {
+                let date = new Date().toLocaleString();
+                button.parentElement.innerHTML = `<span>Asignado a: ${agent} el ${date}</span>`;
+            }
+        }
+    </script>
+</body>
+</html>
