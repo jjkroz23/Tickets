@@ -1,0 +1,65 @@
+<!-- ticket cerrado -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de Ticket Cerrado</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Detalles del Ticket Cerrado</h1>
+
+        <!-- Sección de consulta de ticket cerrado -->
+        <div class="ticket-details">
+            <label for="ticket-id">ID de Ticket (1-10):</label>
+            <input type="number" id="ticket-id" placeholder="Ingresa un número entre 1 y 10" min="1" max="10">
+            <button id="check-ticket-btn">Ver Detalles</button>
+            <div id="ticket-info" class="hidden">
+                <p><strong>Estado:</strong> <span id="ticket-status">Desconocido</span></p>
+                <p><strong>Resolución:</strong> <span id="ticket-resolution">N/A</span></p>
+                <p><strong>Fecha de cierre:</strong> <span id="ticket-close-date">N/A</span></p>
+            </div>
+        </div>
+
+        <!-- Notificaciones -->
+        <div id="notification" class="notification hidden">
+            <p id="notification-msg"></p>
+        </div>
+    </div>
+
+    <script>
+        const closedTickets = {
+            1: { status: "Cerrado", resolution: "Problema resuelto reiniciando el sistema.", closeDate: "2025-03-15" },
+            2: { status: "Cerrado", resolution: "Se reemplazó el componente defectuoso.", closeDate: "2025-03-14" },
+            3: { status: "Cerrado", resolution: "Actualización de software aplicada.", closeDate: "2025-03-13" }
+        };
+
+        document.getElementById('check-ticket-btn').addEventListener('click', function() {
+            const ticketId = document.getElementById('ticket-id').value.trim(); 
+            const ticketIdNumber = parseInt(ticketId);
+
+            if (closedTickets[ticketIdNumber]) {
+                document.getElementById('ticket-status').textContent = closedTickets[ticketIdNumber].status;
+                document.getElementById('ticket-resolution').textContent = closedTickets[ticketIdNumber].resolution;
+                document.getElementById('ticket-close-date').textContent = closedTickets[ticketIdNumber].closeDate;
+                document.getElementById('ticket-info').classList.remove('hidden');
+                showNotification(`Detalles del ticket ${ticketId} cargados.`);
+            } else {
+                showNotification("Ticket no encontrado o aún abierto.");
+            }
+        });
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const notificationMsg = document.getElementById('notification-msg');
+            notificationMsg.textContent = message;
+            notification.classList.remove("hidden");
+            setTimeout(() => notification.classList.add("hidden"), 3000);
+        }
+    </script>
+
+</body>
+</html>
